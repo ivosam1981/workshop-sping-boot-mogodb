@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 
 import com.ivosam.workshopmongo.domain.Post;
 import com.ivosam.workshopmongo.domain.User;
+import com.ivosam.workshopmongo.dto.AuthorDTO;
 import com.ivosam.workshopmongo.repositories.PostRepository;
 import com.ivosam.workshopmongo.repositories.UserRepository;
 
@@ -35,14 +36,11 @@ public class Instantiation implements CommandLineRunner{
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		sdf.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
-		
-		
-		
-		Post post1 = new Post(null, sdf.parse("21/03/2021"), "partiu Viagem", "Vou viajar para Saão Paulo.", maria );
-		Post post2 = new Post(null, sdf.parse("23/03/2021"), "Bom dia", "Acordei", maria );
-
-
 		userRepository.saveAll(Arrays.asList(maria, alex,bob));
+		
+		Post post1 = new Post(null, sdf.parse("21/03/2021"), "partiu Viagem", "Vou viajar para Saão Paulo.", new AuthorDTO(maria));
+		Post post2 = new Post(null, sdf.parse("23/03/2021"), "Bom dia", "Acordei", new AuthorDTO(maria) );
+
 		postRepository.saveAll(Arrays.asList(post1, post2));
 	}
 
